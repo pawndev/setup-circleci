@@ -48,6 +48,12 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test_lint
-      - test_unit
-      - test_e2e
+      - test_lint:
+          requires:
+            - build
+      - test_unit:
+          requires:
+            - build
+      - test_e2e:
+          requires:
+            - build
