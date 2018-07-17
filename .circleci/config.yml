@@ -7,7 +7,7 @@ jobs:
   build:
     working_directory: ~/setup-circleci
     docker:
-      - image: circleci/10.6-jessie
+      - image: circleci/node:10.6-jessie
     steps:
       - checkout
       - run:
