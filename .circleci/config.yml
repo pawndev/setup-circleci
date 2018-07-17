@@ -22,12 +22,24 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+  test_lint:
+    working_directory: ~/setup-circleci
+    docker: circleci/node:10.6-jessie
+    steps:
       - run:
           name: lint
           command: npm run lint
+  test_unit:
+    working_directory: ~/setup-circleci
+    docker: circleci/node:10.6-jessie
+    steps:
       - run:
           name: unit
           command: npm run test:unit
+  test_e2e:
+    working_directory: ~/setup-circleci
+    docker: cypress/base
+    steps:
       - run:
           name: e2e
           command: npm run test:e2e:headless
@@ -36,3 +48,6 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - test_lint
+      - test_unit
+      - test_e2e
