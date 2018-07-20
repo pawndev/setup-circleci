@@ -23,13 +23,11 @@ jobs:
           command: yarn --version
       - run:
           name: yarn install
-          command: yarn install
-      - run:
-          command: ls -l
+          command: yarn install --frozen-lockfile
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
-            - ~/repo/.cache
+            - ~/.cache
       - persist_to_workspace:
           root: ~/repo
           paths:
